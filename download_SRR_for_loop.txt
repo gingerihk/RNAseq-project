@@ -11,11 +11,5 @@ echo "Found SRR numbers. Starting download..."
 for SRR in $SRR_LIST; do
     echo "Downloading $SRR..."
     fasterq-dump --outdir "$OUTPUT_DIR/$SRR" --split-files --verbose --details "SRR10260349"
-
-    if [ $? -ne 0 ]; then
-        echo "Failed to download $SRR. Skipping."
-    else
-        echo "$SRR downloaded successfully."
-    fi
 done
 }
