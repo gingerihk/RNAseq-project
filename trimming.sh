@@ -20,3 +20,4 @@ for R1 in "$INPUT_DIR"/*_1.fastq.gz; do
 
    gzip "$TRIMMED_R1"
    gzip "$TRIMMED_R2"
+done   
