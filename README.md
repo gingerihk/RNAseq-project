@@ -20,7 +20,7 @@ This workflow is designed to perform:
 - R and RStudio 
 - Basic knowledge of RNA-Seq data processing and R programming
 - Understanding of co-expression network analysis (e.g. WGCNA)
-- Conda: required to manage environments 
+- Conda
 
   ### Dependencies
 - Edirect: required for accessing and querying NCBI's databases
