@@ -35,41 +35,17 @@ This workflow is designed to perform:
 
   1. **EDirect Tools** 
      - install by running the following command in your Software directory:
-     `sh -c "$(wget -q https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh -O -)`
-     - activate EDirect in your terminal session:
-     `export PATH=$\{HOME\}/edirect:$\{PATH\}` (export in home)
+     
   2. **SRA-Toolkit** 
      - install SRA-Tools from git in your Software directory:
      `git clone https://github.com/ncbi/sra-tools.git\`
-     - check README.file to find download page for pre-built binaries and run the following command:
-    `wget https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit)`
-     - unzip the tar.gz file you just downloaded
-     `tar -xvzf sratoolkit.3.1.1-centos_linux64.tar.gz`
-     - check folder for fasterq-dump command
-     - run `fasterq-dump` in Bin to check if fasterq-dump is working
-     - load sra-tools module before running fasterq-dump
-     ** Optional ** - add fasterq-dump to your PATH environment to run it from any directory (no more need for module load)
-         - go back to home directory and run `ls -a` to reveal hidden files
-         - enter .bashrc using a command-line text editor (e.g. nano, vim) and paste the path to Bin 
-         - run command source .bashrc to save changes; now fasterq-dump command should work no matter the directory
+    
   3. **Conda**
      - HPCs should normally have this module installed (e.g. check it by running `which conda`);
-     - if installed, load them by running the following command:
-       `module load conda`
-     - conda needs to have miniforge module loaded first 
+     
   4. **FastQC, Cutadapt, Kallisto**
      - if installed on cluster, load them before running your command
      - if not installed on cluster, install them globally in your base environment or in your project environment.
-         - to install cutadapt in your base environment run:
-         `conda install -c bioconda cutadapt`
-         - if you want to install it in your project environment, first load conda, then create your project environment by running the following command:
-         `conda create -n rna-seq-env` (replace rna-seq-env with the name of your project)
-         - install cutadapt:
-         `conda install -c bioconda cutadapt`
-         - verify installation:
-         `cutadapt --version`
-         - your project environemnt can contain as many command-line programs as you need. Creating such an environment is useful when your project requires specific programs and versions. Moreover, it enables exact reproduction of your analysis by using the same tools versions every time.
-         - activate/deactivate environment: `conda activate rna-seq-env` `conda deactivate`
 
   5. **Required R libraries**
      - install them by running `install.packages()` or `BiocManager::install()`
