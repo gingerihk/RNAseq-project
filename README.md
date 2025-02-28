@@ -3,7 +3,7 @@
 ## Introduction
 This project aims to identify gene and transcript level co-expression and co-splicing patterns by utilizing WGCNA (Weighted Gene Co-Expression Network Analysis) R package. It is designed to be flexible and can be applied to any RNA-Seq dataset.
 
-The project folder contains bash scripts used for downloading and processing raw data to generate a counts table and a R script that performs the desired analyses based on the counts table. 
+The project folder contains bash scripts used for downloading and processing raw data to generate a counts table and one R script that performs the desired analyses based on the counts table. 
 
 ## Overview
 
