@@ -60,7 +60,7 @@ This workflow is designed to perform:
   4. **FastQC, Cutadapt, Kallisto**
      - if installed on cluster, load them before running your command
      - if not installed on cluster, install them globally in your base environment or in your project environment.
-         - **For example**, for installing cutadapt in your base environment you would run:
+         - **For example**, to install cutadapt in your base environment, you would run:
          `conda install -c bioconda cutadapt`
          - if you want to install it in your project environment, first load conda, then create your project environment by running the following command:
          `conda create -n rna-seq-env` (replace rna-seq-env with the name of your project)
