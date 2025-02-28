@@ -33,3 +33,6 @@ mkdir -p "$OUTPUT_DIR"
     if [[ -f "$OUTPUT_DIR/abundance.tsv" ]]; then
         mv "$OUTPUT_DIR/abundance.tsv" "$OUTPUT_DIR/${SRR}_abundance.tsv"
     fi
+
+#Sync files
+rsync -xatv --bwlimit=5000  source/table_counts.tsv destination/software-project
