@@ -144,7 +144,7 @@ cat "$TEMP_FILE" >> "$OUTPUT_FILE"
 * rsync transfers files between remote and local systems
 
 ### RNA-Seq-project.R: processes the transcript counts table and performs co-expression and co-splicing analyses 
-* hashtags provide explanations for what lines do
+* explanations are provided through "#"
 
 ## Input files:
 * Raw FASTQ files
