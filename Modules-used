@@ -1,6 +1,10 @@
-#MODULES
+# MODULES
 
-- sratoolkit/
+- miniforge/23.11.0
+- conda/23.11.0
+- sratoolkit
+- edirect
 - python/3.9.6 
 - fastqc 
 - cutadapt 
+- kallisto 
