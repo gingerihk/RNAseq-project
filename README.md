@@ -18,7 +18,7 @@ This workflow is designed to perform:
 
 - High-performance computing (HPC) system
 - R and RStudio 
-- Basic knowledge of RNA-Seq data processing and R programming
+- Basic knowledge of RNA-Seq data processing, Linux commands and R programming
 - Understanding of co-expression network analysis (e.g. WGCNA)
 - Conda
 
