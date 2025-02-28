@@ -22,7 +22,7 @@ This workflow is designed to perform:
 - Understanding of co-expression network analysis (e.g. WGCNA)
 - Conda: required to manage environments 
 
-  # Dependencies
+  ### Dependencies
 - Edirect: required for accessing and querying NCBI's databases
 - SRA-Toolkit: required for downloading RNA-Seq data from NCBI SRA
 - FastQC: required for reads quality control
