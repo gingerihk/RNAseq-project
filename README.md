@@ -75,10 +75,10 @@ This workflow is designed to perform:
      - install them by running `install.packages()` or `BiocManager::install()`
  
 ## Usage 
-### job-submission.sh : job script sent to the cluster to run the bash scripts 
-### download-raw-rnaseq-data.sh : downloads FASTA files based on project ID
+### job-submission.sh: job script sent to the cluster to run the bash scripts 
+### download-raw-rnaseq-data.sh: downloads FASTA files based on project ID
 
-####`SRR_LIST=$(esearch -db sra -query "$PROJECT_ID" | efetch -format runinfo | cut -d',' -f1 | grep SRR)`
+`SRR_LIST=$(esearch -db sra -query "$PROJECT_ID" | efetch -format runinfo | cut -d',' -f1 | grep SRR)`
  * esearch searches sra and retrieves a list of unique identifiers that match the query
  * efetch retrived metadata table in csv format
  * cut and grep extract SRR numbers
@@ -96,15 +96,16 @@ done`
 * cat reads the list
 * fasterq-dump downloads FASTQ files and gzip compresses them; --split-files is chosen because of paired data
 
-### fastqc.sh : performs quality check on each FASTQ file
+### fastqc.sh: performs quality check on each FASTQ file
 `for fastq_file in "$OUTPUT_DIR"/*.fastq.gz; do
    fastqc -o "$QC_DIR" "$fastq_file"
 done`
 
-### fastq-trimming.sh : trims 3' and 5' ends of each file
+### fastq-trimming.sh: trims 3' and 5' ends of each file
 `cutadapt -u 10 -u -20 -U 10 -U -20 -o "$TRIMMED_R1" -p "$TRIMMED_R2" "$R1" "$R2"`
 * trims bases from both forward and reverse reads
-### kallisto.sh : explains how to build a transcriptome index and performs pseudoalignment 
+  
+### kallisto.sh: explains how to build a transcriptome index and performs pseudoalignment 
 `kallisto quant -i "$INDEX_FILE" -o "$OUTPUT_DIR" -b 100 "$R1" "$R2"
 if [[ -f "$OUTPUT_DIR/abundance.tsv" ]]; then
         mv "$OUTPUT_DIR/abundance.tsv" "$OUTPUT_DIR/${SRR}_abundance.tsv"
@@ -113,7 +114,7 @@ if [[ -f "$OUTPUT_DIR/abundance.tsv" ]]; then
 * -b means boostrap replicates will be performed
 * renames abundance.tsv tables
 
-### counts.sh : combines counts from multiple samples into a table
+### counts.sh: combines counts from multiple samples into a table
 `SRR_DIRS=($(find "$KALLISTO_DIR" -maxdepth 1 -type d -name "SRR*" | sort))`
 * finds all SRR directories within the Kallisto output directory
 * sorts them alphabetically
@@ -142,7 +143,7 @@ cat "$TEMP_FILE" >> "$OUTPUT_FILE"
 `rsync -xatv --bwlimit=5000  source/table_counts.tsv destination/software-project`
 * rsync transfers files between remote and local systems
 
-### RNA-Seq-project.R : processes the transcript counts table and performs co-expression and co-splicing analyses 
+### RNA-Seq-project.R: processes the transcript counts table and performs co-expression and co-splicing analyses 
 * hashtags provide explanations for what lines do
 
 ## Input files:
