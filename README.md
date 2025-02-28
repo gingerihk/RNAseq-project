@@ -93,15 +93,15 @@ done`
 * cat reads the list
 * fasterq-dump downloads FASTQ files and gzip compresses them; --split-files is chosen because of paired data
 
-# run-fastqc.sh : performs quality check on each FASTQ file
+### run-fastqc.sh : performs quality check on each FASTQ file
 `for fastq_file in "$OUTPUT_DIR"/*.fastq.gz; do
    fastqc -o "$QC_DIR" "$fastq_file"
 done`
 
-# fastq-trimming.sh : trims 3' and 5' ends of each file
+### fastq-trimming.sh : trims 3' and 5' ends of each file
 `cutadapt -u 10 -u -20 -U 10 -U -20 -o "$TRIMMED_R1" -p "$TRIMMED_R2" "$R1" "$R2"`
 * trims bases from both forward and reverse reads
-# kallisto.sh : explains how to build a transcriptome index and performs pseudoalignment 
+### kallisto.sh : explains how to build a transcriptome index and performs pseudoalignment 
 `kallisto quant -i "$INDEX_FILE" -o "$OUTPUT_DIR" -b 100 "$R1" "$R2"
 if [[ -f "$OUTPUT_DIR/abundance.tsv" ]]; then
         mv "$OUTPUT_DIR/abundance.tsv" "$OUTPUT_DIR/${SRR}_abundance.tsv"
@@ -110,7 +110,7 @@ if [[ -f "$OUTPUT_DIR/abundance.tsv" ]]; then
 * -b means boostrap replicates will be performed
 * renames abundance.tsv tables
 
-# counts.sh : combines counts from multiple samples into a table
+### counts.sh : combines counts from multiple samples into a table
 `SRR_DIRS=($(find "$KALLISTO_DIR" -maxdepth 1 -type d -name "SRR*" | sort))`
 * finds all SRR directories within the Kallisto output directory
 * sorts them alphabetically
@@ -139,7 +139,7 @@ cat "$TEMP_FILE" >> "$OUTPUT_FILE"
 `rsync -xatv --bwlimit=5000  tosevsa2@hoffman2.idre.ucla.edu:/u/scratch/t/tosevsa2/table_counts.tsv /Users/andreeaiuhaniak/Desktop/software-project`
 * rsync transfers files between remote and local systems; from source to destination
 
-# RNA-Seq-project.R : processes the transcript_counts table and performs co-expression and co-splicing analyses 
+### RNA-Seq-project.R : processes the transcript_counts table and performs co-expression and co-splicing analyses 
 * hashtags provide explanations for what lines do
 
 ## Input files:
