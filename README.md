@@ -156,8 +156,8 @@ cat "$TEMP_FILE" >> "$OUTPUT_FILE"
 * Figures: heatmaps, dendrograms, bar plots 
 
 ## Notes
-* ensure all dependencies are loaded before running the scripts
-* adapt paths and module versions to your HPC environment 
+* Ensure all dependencies are loaded before running the scripts
+* Adapt paths and module versions to your HPC environment 
 
 
 
