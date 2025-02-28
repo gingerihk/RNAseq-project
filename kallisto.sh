@@ -23,6 +23,8 @@ R1="$INPUT_DIR/${SRR}_trimmed_1.fastq.gz"
 R2="$INPUT_DIR/${SRR}_trimmed_2.fastq.gz"
 
 # Define sample name and output directory
+OUTPUT_DIR="$OUTPUT_BASE/$SRR"
+mkdir -p "$OUTPUT_DIR"
 
 # Run Kallisto
 ~/.conda/envs/kallisto/bin/kallisto quant -i "$INDEX_FILE" -o "$OUTPUT_DIR" -b 100 "$R1" "$R2"
