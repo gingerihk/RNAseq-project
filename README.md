@@ -55,73 +55,15 @@ This workflow is designed to perform:
   
 ### download-raw-rnaseq-data.sh: downloads FASTA files based on project ID
 
-`SRR_LIST=$(esearch -db sra -query "$PROJECT_ID" | efetch -format runinfo | cut -d',' -f1 | grep SRR)`
- * esearch searches sra and retrieves a list of unique identifiers that match the query
- * efetch retrived metadata table in csv format
- * cut and grep extract SRR numbers
-   
-`FILTERED_SRR_LIST=$(echo "$SRR_LIST" | awk '$1 >= "SRR10260429" && $1 <= "SRR10260508"'| sort)
- echo "$FILTERED_SRR_LIST" > "$SCRATCH_DIR/CD14_SRR_list.txt"`
- * awk and sort filteres and sorts the SRR numbers in the given range
- * echo saves filtered list to a .txt file
-   
-`for SRR in $(cat "$SCRATCH_DIR/CD14_SRR_list.txt"); do
-    echo "Downloading $SRR..."
-    fasterq-dump --temp "$TEMP_DIR" --outdir "$OUTPUT_DIR" --split-files --details "$SRR"
-    gzip "$OUTPUT_DIR/${SRR}"_*.fastq
-done`
-* cat reads the list
-* fasterq-dump downloads FASTQ files and gzip compresses them; --split-files is chosen because of paired data
-
 ### fastqc.sh: performs quality check on each FASTQ file
-`for fastq_file in "$OUTPUT_DIR"/*.fastq.gz; do
-   fastqc -o "$QC_DIR" "$fastq_file"
-done`
 
 ### fastq-trimming.sh: trims 3' and 5' ends of each file
-`cutadapt -u 10 -u -20 -U 10 -U -20 -o "$TRIMMED_R1" -p "$TRIMMED_R2" "$R1" "$R2"`
-* trims bases from both forward and reverse reads
   
 ### kallisto.sh: explains how to build a transcriptome index and performs pseudoalignment 
-`kallisto quant -i "$INDEX_FILE" -o "$OUTPUT_DIR" -b 100 "$R1" "$R2"
-if [[ -f "$OUTPUT_DIR/abundance.tsv" ]]; then
-        mv "$OUTPUT_DIR/abundance.tsv" "$OUTPUT_DIR/${SRR}_abundance.tsv"
-    fi`
-* quant estimates transcript abundances through pseudoalignment
-* -b means boostrap replicates will be performed
-* renames abundance.tsv tables
 
 ### counts.sh: combines counts from multiple samples into a table
-`SRR_DIRS=($(find "$KALLISTO_DIR" -maxdepth 1 -type d -name "SRR*" | sort))`
-* finds all SRR directories within the Kallisto output directory
-* sorts them alphabetically
   
-`ABUNDANCE_FILE=$(find "$SRR_DIR" -maxdepth 1 -type f -name "*_abundance.tsv" | head -n 1)`
-* finds abundance file in each SRR directory
-  
-`cut -f4 "$ABUNDANCE_FILE" | tail -n +2 > "${SRR_ID}_counts.tmp"
-paste "$TEMP_FILE" "${SRR_ID}_counts.tmp" > "${TEMP_FILE}_new"
-mv "${TEMP_FILE}_new" "$TEMP_FILE"
-rm "${SRR_ID}_counts.tmp`
-* cut extracts transcript counts from the 4th column for each sample
-* paste combines the extracted counts with the existing temporary table
-* mv updates the temporary counts table
-
-`HEADER="Transcript_ID"
-for SRR_DIR in "${SRR_DIRS[@]}"; do
-    HEADER+="\t$(basename "$SRR_DIR")"
-done
-echo -e "$HEADER" > "$OUTPUT_FILE"
-cat "$TEMP_FILE" >> "$OUTPUT_FILE"
-`
-* loops through the folder where SRR directories are, extracts their names and > creates the output file and writes the header row to it
-* cat displays the content of the file that stores transcript counts and >> apends the count data to the output file
-
-`rsync -xatv --bwlimit=5000  source/table_counts.tsv destination/software-project`
-* rsync transfers files between remote and local systems
-
 ### RNA-Seq-project.R: processes the transcript counts table and performs co-expression and co-splicing analyses 
-* explanations are provided through "#"
 
 ## Input files:
 * Raw FASTQ files
