@@ -139,7 +139,7 @@ cat "$TEMP_FILE" >> "$OUTPUT_FILE"
 * loops through the folder where SRR directories are, extracts their names and > creates the output file and writes the header row to it
 * cat displays the content of the file that stores transcript counts and >> apends the count data to the output file
 
-`rsync -xatv --bwlimit=5000  tosevsa2@hoffman2.idre.ucla.edu:/u/scratch/t/tosevsa2/table_counts.tsv /Users/andreeaiuhaniak/Desktop/software-project`
+`rsync -xatv --bwlimit=5000  source/table_counts.tsv destination/software-project`
 * rsync transfers files between remote and local systems; from source to destination
 
 ### RNA-Seq-project.R : processes the transcript counts table and performs co-expression and co-splicing analyses 
