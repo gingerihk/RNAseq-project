@@ -75,7 +75,8 @@ This workflow is designed to perform:
      - install them by running `install.packages()` or `BiocManager::install()`
  
 ## Usage 
-### job-submission.sh: job script sent to the cluster to run the bash scripts 
+### job-submission.sh: submit and execute bash scripts on cluster 
+  
 ### download-raw-rnaseq-data.sh: downloads FASTA files based on project ID
 
 `SRR_LIST=$(esearch -db sra -query "$PROJECT_ID" | efetch -format runinfo | cut -d',' -f1 | grep SRR)`
