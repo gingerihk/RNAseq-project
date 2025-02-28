@@ -1,7 +1,7 @@
  Build index
--first download fasta file: wget ftp://ftp.ensembl.org/pub/release-110/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz -O /u/scratch/t/tosevsa2/kallisto/Homo_sapiens.GRCh38.cdna.all.fa.gz
+-first download fasta file: wget ftp://ftp.ensembl.org/pub/release-110/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz -O desired-directory/Homo_sapiens.GRCh38.cdna.all.fa.gz
 -then unzipp it bc kallisto needs it unzipped: gunzip Homo_sapiens.GRCh38.cdna.all.fa.gz 
--build index: kallisto index -i /u/scratch/t/tosevsa2/kallisto/transcriptome.idx /u/scratch/t/tosevsa2/kallisto/Homo_sapiens.GRCh38.cdna.all.fa
+-build index: kallisto index -i directory-where-your-index-will-be-saved/transcriptome.idx desired-directory/Homo_sapiens.GRCh38.cdna.all.fa
 
 
 #!/bin/bash
