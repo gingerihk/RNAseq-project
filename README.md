@@ -46,7 +46,7 @@ This workflow is designed to perform:
   4. **FastQC, Cutadapt, Kallisto**
      - if installed on cluster, load them before running your command
      - if not installed on cluster, install them globally in your base environment or in your project environment.
-
+     e.g. `conda install -c bioconda cutadapt`
   5. **Required R libraries**
      - install them by running `install.packages()` or `BiocManager::install()`
  
