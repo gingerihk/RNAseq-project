@@ -77,14 +77,17 @@ This workflow is designed to perform:
 ## Usage 
 ### job-submission.sh : job script sent to the cluster to run the bash scripts 
 ### download-raw-rnaseq-data.sh : downloads FASTA files based on project ID
+
 `SRR_LIST=$(esearch -db sra -query "$PROJECT_ID" | efetch -format runinfo | cut -d',' -f1 | grep SRR)`
  * esearch searches sra and retrieves a list of unique identifiers that match the query
  * efetch retrived metadata table in csv format
- * cut and grep extract SRR numbers from the result
+ * cut and grep extract SRR numbers
+   
 `FILTERED_SRR_LIST=$(echo "$SRR_LIST" | awk '$1 >= "SRR10260429" && $1 <= "SRR10260508"'| sort)
  echo "$FILTERED_SRR_LIST" > "$SCRATCH_DIR/CD14_SRR_list.txt"`
  * awk and sort filteres and sorts the SRR numbers in the given range
  * echo saves filtered list to a .txt file
+   
 `for SRR in $(cat "$SCRATCH_DIR/CD14_SRR_list.txt"); do
     echo "Downloading $SRR..."
     fasterq-dump --temp "$TEMP_DIR" --outdir "$OUTPUT_DIR" --split-files --details "$SRR"
