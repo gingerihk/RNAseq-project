@@ -140,7 +140,7 @@ cat "$TEMP_FILE" >> "$OUTPUT_FILE"
 * cat displays the content of the file that stores transcript counts and >> apends the count data to the output file
 
 `rsync -xatv --bwlimit=5000  source/table_counts.tsv destination/software-project`
-* rsync transfers files between remote and local systems; from source to destination
+* rsync transfers files between remote and local systems
 
 ### RNA-Seq-project.R : processes the transcript counts table and performs co-expression and co-splicing analyses 
 * hashtags provide explanations for what lines do
