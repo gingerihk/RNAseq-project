@@ -60,22 +60,22 @@ This workflow is designed to perform:
   4. **FastQC, Cutadapt, Kallisto**
      - if installed on cluster, load them before running your command
      - if not installed on cluster, install them globally in your base environment or in your project environment.
-         **For example**, for installing cutadapt in your base environment you would run:
+         - **For example**, for installing cutadapt in your base environment you would run:
          `conda install -c bioconda cutadapt`
-         If you want to install it in your project environment, first load conda, then create your project environment by running the following command:
+         - if you want to install it in your project environment, first load conda, then create your project environment by running the following command:
          `conda create -n rna-seq-env` (replace rna-seq-env with the name of your project)
-         Then install cutadapt:
+         - then install cutadapt:
          `conda install -c bioconda cutadapt`
-         Verify installation:
+         - verify installation:
          `cutadapt --version`
-         Your project environemnt can contain as many command-line programs as you need. Creating such an environment is useful when your project requires specific programs and versions. Moreover, it enables exact reproduction of your analysis by using the same tools versions every time.
-         Activate/deactivate environment: `conda activate rna-seq-env` `conda deactivate`
+         - your project environemnt can contain as many command-line programs as you need. Creating such an environment is useful when your project requires specific programs and versions. Moreover, it enables exact reproduction of your analysis by using the same tools versions every time.
+         - activate/deactivate environment: `conda activate rna-seq-env` `conda deactivate`
 
   5. **Required R libraries**
      - install them by running `install.packages()` or `BiocManager::install()`
  
 ## Usage 
-### run-jobs: job script sent to the cluster to run the bash scripts 
+### job-submission.sh : job script sent to the cluster to run the bash scripts 
 ### download-raw-rnaseq-data.sh : downloads FASTA files based on project ID
 `SRR_LIST=$(esearch -db sra -query "$PROJECT_ID" | efetch -format runinfo | cut -d',' -f1 | grep SRR)`
  * esearch searches sra and retrieves a list of unique identifiers that match the query
@@ -93,7 +93,7 @@ done`
 * cat reads the list
 * fasterq-dump downloads FASTQ files and gzip compresses them; --split-files is chosen because of paired data
 
-### run-fastqc.sh : performs quality check on each FASTQ file
+### fastqc.sh : performs quality check on each FASTQ file
 `for fastq_file in "$OUTPUT_DIR"/*.fastq.gz; do
    fastqc -o "$QC_DIR" "$fastq_file"
 done`
