@@ -8,11 +8,11 @@ The project folder contains bash scripts used for downloading and processing raw
 ## Overview
 
 This workflow is designed to perform:
-  - data aquisition: downloading raw RNA-Seq data based on Project ID number
-  - pre-processing: QC and trimming
-  - pseudoalignement and transcript quantification
-  - co-expression and co-splicing analysis
-  - functional enrichment 
+  - Data aquisition: downloading raw RNA-Seq data based on Project ID number
+  - Pre-processing: QC and trimming
+  - Pseudoalignement and transcript quantification
+  - Co-expression and co-splicing analysis
+  - Functional enrichment 
 
 ## Prerequisites 
 
@@ -78,7 +78,7 @@ This workflow is designed to perform:
 ### job-submission.sh : job script sent to the cluster to run the bash scripts 
 ### download-raw-rnaseq-data.sh : downloads FASTA files based on project ID
 
-`SRR_LIST=$(esearch -db sra -query "$PROJECT_ID" | efetch -format runinfo | cut -d',' -f1 | grep SRR)`
+####`SRR_LIST=$(esearch -db sra -query "$PROJECT_ID" | efetch -format runinfo | cut -d',' -f1 | grep SRR)`
  * esearch searches sra and retrieves a list of unique identifiers that match the query
  * efetch retrived metadata table in csv format
  * cut and grep extract SRR numbers
